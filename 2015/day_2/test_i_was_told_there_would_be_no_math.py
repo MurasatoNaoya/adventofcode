@@ -16,8 +16,8 @@ def test_generate_faces_sum_and_min(data, expected_faces_sums, expected_smallest
     assert smallest_faces == expected_smallest_faces
 
 
-@pytest.mark.parametrize('expected_faces_sums, expected_smallest_faces', [
-    ([12])
+# @pytest.mark.parametrize('expected_faces_sums, expected_smallest_faces', [
+#     ([12])
 
 
 
@@ -26,5 +26,5 @@ def test_generate_faces_sum_and_min(data, expected_faces_sums, expected_smallest
 
 
 
-]
-)
+# ]
+# )
