@@ -41,7 +41,7 @@ def check_valid_round(turn:list[tuple[int, str]], actual: dict) -> bool:
     '''Returns bool for whether a given round is valid, given starting list of cubes.'''
 
     for draw in turn:
-        print(draw)
+        # print(draw)
         count, colour = draw
         # Count must be converted to an int, 
         # as it if from a .txt file, which only
@@ -58,16 +58,18 @@ def check_valid_game(game:list[list[tuple[int, str]]], actual: dict) -> bool:
     for round in game:
         if not check_valid_round(round, actual):
             return False
-    return True  
+    return True
 
 
-# def count_valid_games(games:list[list[list[tuple[int, str]]]]) -> int:
-#     '''Returns number of valid games, for a given games array.'''
-
-
-
-def count_id_sum():
-    ...
+def count_id_sum(actual: dict):
+    sum = 0
+    with open('/Users/andrewnaoyamcwilliam/Desktop/adventofcode/2023/day_2/input.txt', 'r') as f:
+        for line in f:
+            id, rounds = extract_id_game(line)
+            game = parse_game(rounds)
+            if check_valid_game(game, actual):
+                sum += int(id)
+    return sum
 
 
 
@@ -79,8 +81,5 @@ if __name__ == '__main__':
         'blue' : 14
     
     }
-
-
-    id, rounds = extract_id_game("Game 1: 7 blue, 6 green, 3 red; 3 red, 5 green, 1 blue; 1 red, 5 green, 8 blue; 3 red, 1 green, 5 blue")
-    game = parse_game(rounds)
-    print(check_valid_game(game, actual=actual_draw))
+    
+    print(f'The sum of the IDs of valid games is : {count_id_sum(actual_draw)}')
