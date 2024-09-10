@@ -37,7 +37,6 @@ def parse_game(turns:str) -> list[list[tuple[int, str]]]:
 
 
 
-
 def check_valid_turn(turn:list[tuple[int, str]], actual: dict) -> bool:
     '''Returns bool for whether a given turn is valid, given starting list of cubes.'''
 
@@ -53,6 +52,22 @@ def check_valid_turn(turn:list[tuple[int, str]], actual: dict) -> bool:
 
 
 
+def finds_max_cubes_for_game(game:list[list[tuple[int, str]]]) -> dict:
+    '''Traverses a game list, and returns max cubes for each given colour.'''
+    cubes = {'blue': 0, 'red': 0, 'green' : 0 }
+
+    for turn in game:
+        for draw in turn:
+            count, colour = draw
+            if count > cubes[colour]:
+                cubes[colour] = count 
+
+    # A dictionary of maximum cubes, for each colour.      
+    return cubes
+        
+
+
+
 def check_valid_game(game:list[list[tuple[int, str]]], actual: dict) -> bool:
     '''Returns bool for whether a given game is valid, given starting list of cubes.'''
 
@@ -62,7 +77,7 @@ def check_valid_game(game:list[list[tuple[int, str]]], actual: dict) -> bool:
     return True
 
 
-def count_id_id_sum(actual: dict):
+def count_id_sum(actual: dict):
     '''Reads from the input text file, and accumulates the id_sum of all game IDs.'''
     id_sum = 0
     with open('/Users/andrewnaoyamcwilliam/Desktop/adventofcode/2023/day_2/input.txt',
@@ -85,4 +100,4 @@ if __name__ == '__main__':
 
     }
 
-    print(f'The sum of the IDs for all valid games is : {count_id_id_sum(actual_draw)}')
+    print(f'The sum of the IDs for all valid games is : {count_id_sum(actual_draw)}')
